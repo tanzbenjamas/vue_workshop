@@ -1,5 +1,5 @@
 <template>
-  <v-card id="stock_cards">
+  <v-card ripple class="cursor" id="stock_cards">
      <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="headline md-1">{{title}}</v-list-item-title>
@@ -7,7 +7,7 @@
       </v-list-item-content>
 
          <v-list-item-icon title size="80" :color="avatar_bg">
-            <v-icon>{{avatar_ic}}</v-icon>
+            <v-icon >{{avatar_ic}}</v-icon>
           </v-list-item-icon>
     </v-list-item>
   </v-card>
@@ -27,5 +27,7 @@ data() {
 </script>
 
 <style>
-
+.cursor{
+cursor: pointer;
+}
 </style>
