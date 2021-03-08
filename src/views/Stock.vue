@@ -6,7 +6,7 @@
           title="TOTAL"
           avatar_ic="mdi-cart-outline"
           avatar_bg="#00a65a"
-          subtitle="1,800"
+          subtitle="80"
         />
       </v-col>
 
@@ -33,7 +33,7 @@
           title="DISCOUNT"
           avatar_ic="mdi-gift-outline"
           avatar_bg="#00c0ef"
-          subtitle="101"
+          subtitle="200"
         />
       </v-col>
     </v-row>
@@ -71,8 +71,8 @@
         <template v-slot:item="{ item }">
           <tr>
             <td>{{ item.id }}</td>
-            <td>
-
+            <td>{{ item.name }}</td>
+                  <td>
               <v-img
                 v-bind:src="item.image | imageUrl"
                 aspect-ratio="1"
@@ -81,10 +81,9 @@
                 max-height="50"
               ></v-img>
             </td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.price | currency("0") }}</td>
-            <td>{{ item.stock | number("0,0") }}</td>
-            <td>
+            <td>{{ item.price  }}</td>
+            <td>{{ item.stock  }}</td>
+                  <td>
               <v-icon class="mr-2" @click="editItem(item)">
                 edit
               </v-icon>
@@ -93,6 +92,8 @@
                 delete
               </v-icon>
             </td>
+
+      
           </tr>
         </template>
 
@@ -134,24 +135,12 @@ export default {
           sortable: false,
           value: "id",
         },
-        { text: "Image", value: "image" },
         { text: "Name", value: "name" },
+        { text: "Image", value: "image" },
         { text: "Price", value: "price" },
         { text: "Stock", value: "stock" },
         { text: "Action", value: "action" },
       ],
-      editedItem: {
-       name: "",
-      price: "",
-      stock: "",
-      image: null,
-      },
-      defaultItem: {
-     name: "",
-      price: "",
-      stock: "",
-      image: null,
-      },
     };
   },
   mounted() {
@@ -162,27 +151,6 @@ export default {
       this.stockArray = result.data;
     });
   },
-  methods: {
-        editItem (item) {
-        this.editedIndex = this.stockArray.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.stockArray.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-  },
-      watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
-    },
 };
 </script>
 
