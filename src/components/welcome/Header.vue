@@ -5,9 +5,9 @@
       dense
       dark
     >
-    <v-toolbar-title>CMStock Workshop V{{ version }}</v-toolbar-title>
+    <v-toolbar-title>Stock Vue{{ version }}</v-toolbar-title>
       <v-spacer></v-spacer>
-    <span> สวีดัก  {{ $store.getters["username"] |  capitalize }}</span>
+    <span> สวัสดี  {{ $store.getters["username"] |  capitalize }}</span>
     <v-btn icon @click="onClickLogOff">
       <v-icon>mdi-export</v-icon>
     </v-btn>
