@@ -1,0 +1,3 @@
+yarn serve หน้าบ้าน
+yarn nodemon หลังบ้าน
+สามารถเปลี่ยน path ได้ที่ login this.$router.push("/deadline") //ไปหน้าdeadline เป็นดาต้ามอก
