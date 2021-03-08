@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="center" justify="center" class="pt-10">
       <v-card style="width:400px">
-        <v-img class="white--text align-end"  src="@/assets/login_bg.jpg" height="200px">
+        <v-img class="white--text align-end"  src="@/assets/maxresdefault.jpg" height="200px">
                 
         <v-card-title primary-title>
           Login
