@@ -62,47 +62,20 @@
               class="mb-2"
             >
               <v-icon left>add</v-icon>
-              <span>New Product</span>
+              <span>new stock router</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-dialog
-      v-model="dialog"
-      width="500"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="red lighten-2"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          test ค่อยว่ากัน
-        </v-btn>
-      </template>
+            
 
-      <v-card>
-        <v-card-title class="headline grey lighten-2">
-          Privacy Policy
-        </v-card-title>
-
-        <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="dialog = false"
-          >
-            I accept
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+         <v-btn
+              @click="modelCreate()"
+              color="primary"
+              dark
+              class="mb-2"
+            >
+              <v-icon left>add</v-icon>
+              <span>new stock model</span>
+            </v-btn>
 
           </v-toolbar>
         </template>
@@ -135,10 +108,6 @@
           </tr>
         </template>
       </v-data-table>
-
-     
-
-
     </v-card>
 
 
@@ -164,6 +133,46 @@
       </v-dialog>
 
 
+         <v-dialog v-model="modelcreate" max-width="700" max-height="100%">
+        <v-card >
+          <v-card-title class="headline">Creat Stock</v-card-title>
+          <v-card-actions>
+          <v-container>
+    <v-row class="justify-center">
+      <v-col cols="8">
+        <v-card class="mx-auto  pa-5" outlined>
+          <v-form @submit.prevent="submit" ref="form">
+            <v-text-field v-model="product.name" :counter="10" label="Name" required></v-text-field>
+
+            <v-text-field suffix="THB" type="number" v-model="product.price" label="Price" required></v-text-field>
+
+            <v-text-field suffix="PCS" v-model="product.stock" label="Stock" required></v-text-field>
+
+            <input type="file" @change="onFileSelected" />
+            <br />
+            <img v-if="imageURL" :src="imageURL" style="height: 200px;" class="mt-3" />
+            <br />
+            <br />
+            <v-layout row>
+              <v-spacer></v-spacer>
+              <v-btn class="mr-4" text @click="modelCreate = false">
+                Cancel
+              </v-btn>
+
+              <v-btn color="success" type="submit">
+                Confirm
+              </v-btn>
+            </v-layout>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+
   </v-container>
 </template>
 
@@ -179,10 +188,18 @@ export default {
     return {
       search: "",
       dialog: false,
+      modelcreate:false,
       confirmDeleteDlg:false,
       selectedDelete:"",
       stockArray: [],
       editedIndex: -1,
+      product: {
+      name: "",
+      price: "",
+      stock: "",
+      image: null
+    },
+    imageURL: null,
       headers: [
         {
           text: "Id",
@@ -219,13 +236,32 @@ export default {
         this.stockArray = result.data
       },
 
+      modelCreate(){
+        console.log("test")
+        this.modelcreate = true;
+      },
 
+  
 
+      onFileSelected(event) {
+      const reader = new FileReader();
+      reader.onload = event => {
+        this.imageURL = event.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+      this.product.image = event.target.files[0];
+    },
+    async submit() {
+      let formData = new FormData();
+      const { name, price, stock } = this.product;
+      formData.append("name", name);
+      formData.append("stock", stock);
+      formData.append("price", price);
+      formData.append("image", this.product.image);
+      await api.addProduct(formData);
+      window.location.reload();
+    },
   },
-
- 
-
-
 };
 </script>
 
