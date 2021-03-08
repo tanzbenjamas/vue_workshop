@@ -1,47 +1,40 @@
 <template lang="html">
   <v-container>
-    <v-card class="mx-auto  pa-5" outlined>
-      <v-form @submit.prevent="submit">
-        <v-text-field
-          v-model="product.name"
-          :counter="10"
-          label="Name"
-          required
-        ></v-text-field>
+    <v-row class="justify-center">
+      <v-col cols="8">
+        <v-card class="mx-auto  pa-5" outlined>
+          <v-form @submit.prevent="submit" ref="form">
+            <v-text-field v-model="product.name" :counter="10" label="Name" required></v-text-field>
 
-        <v-text-field
-          suffix="THB"
-          type="number"
-          v-model="product.price"
-          label="Price"
-          required
-        ></v-text-field>
+            <v-text-field suffix="THB" type="number" v-model="product.price" label="Price" required></v-text-field>
 
-        <v-text-field
-          suffix="PCS"
-          v-model="product.stock"
-          label="Stock"
-          required
-        ></v-text-field>
+            <v-text-field suffix="PCS" v-model="product.stock" label="Stock" required></v-text-field>
 
-        <input @change="onFileSelected" type="file" name="" id="" />
-        <br />
-        <v-img v-if="imageURL" :src="imageURL" heigth="200px" width="200px"></v-img>
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-btn class="mr-4" @click="cancel">
-            Cancel
-          </v-btn>
-          <v-btn color="success" type="submit">
-            Confirm
-          </v-btn>
-        </v-row>
-      </v-form>
-    </v-card>
+            <input type="file" @change="onFileSelected" />
+            <br />
+            <img v-if="imageURL" :src="imageURL" style="height: 200px;" class="mt-3" />
+            <br />
+            <br />
+            <v-layout row>
+              <v-spacer></v-spacer>
+              <v-btn class="mr-4" @click="cancel">
+                Cancel
+              </v-btn>
+
+              <v-btn color="success" type="submit">
+                Confirm
+              </v-btn>
+            </v-layout>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import api from "@/services/api";
+
 export default {
   name: "stock-create",
   data: () => ({
@@ -49,29 +42,38 @@ export default {
       name: "",
       price: "",
       stock: "",
-      image: null,
+      image: null
     },
-    imageURL: null,
+    imageURL: null
   }),
 
   methods: {
     onFileSelected(event) {
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = event => {
         this.imageURL = event.target.result;
       };
       reader.readAsDataURL(event.target.files[0]);
-      //update
       this.product.image = event.target.files[0];
     },
-    submit() {
-      alert(JSON.stringify(this.product));
+    async submit() {
+      let formData = new FormData();
+      const { name, price, stock } = this.product;
+      formData.append("name", name);
+      formData.append("stock", stock);
+      formData.append("price", price);
+      formData.append("image", this.product.image);
+      await api.addProduct(formData);
+      this.$router.back();
     },
-        cancel() {
+    cancel() {
       this.$router.back();
     }
-  },
+  }
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.stock-create {
+}
+</style>

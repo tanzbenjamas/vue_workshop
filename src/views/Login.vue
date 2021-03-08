@@ -55,8 +55,8 @@ export default {
   },
   methods: {
     submit(){
-      this.$router.push("/stock") //ไปหน้าStock
-      //  this.$router.push("/deadline") 
+      // this.$router.push("/stock") //ไปหน้าStock
+      // //  this.$router.push("/deadline") 
       this.$store.dispatch({
         type:"doLogin",
         username: this.account.username,

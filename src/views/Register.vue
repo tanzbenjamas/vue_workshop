@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import api from '@/services/api'
+
 export default {
 
  data() {
@@ -66,8 +68,9 @@ export default {
     }
   },
   methods: {
-    submit(){
-      alert(JSON.stringify(this.account))
+    async submit(){
+      // alert(JSON.stringify(this.account))
+      await api.register(this.account)
     }
   },
 

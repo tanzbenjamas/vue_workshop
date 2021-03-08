@@ -44,6 +44,7 @@ const routes = [
     name: 'stockEdit',
     component: StockEdit
   },
+
   {
     path: '/report',
     name: 'report',

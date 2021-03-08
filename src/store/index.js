@@ -39,9 +39,9 @@ export default new Vuex.Store({
   },
   //method commit คล้ายๆ angular 
   actions: {
-     doLogin({ commit, dispatch }, {username,password}) {
+     async doLogin({ commit, dispatch }, {username,password}) {
        //await api.login({ username, password });
-      let result = api.login({ username, password });
+      let result = await api.login({ username, password });
       if (result == true) {
         commit("SET_LOGGED_IN");
         commit("SET_USERNAME", username);
