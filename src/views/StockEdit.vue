@@ -72,7 +72,6 @@ export default {
       if (this.imageFile != null) {
         formData.append("image", this.imageFile);
       }
-
       await api.updateProduct(formData);
       this.$router.back();
     },

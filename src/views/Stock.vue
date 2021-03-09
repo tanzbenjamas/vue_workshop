@@ -155,7 +155,7 @@
             <br />
             <v-layout row>
               <v-spacer></v-spacer>
-              <v-btn class="mr-4" text @click="modelCreate = false">
+              <v-btn class="mr-4" text @click="modelcreate = false">
                 Cancel
               </v-btn>
 
@@ -171,6 +171,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      
 
 
   </v-container>
@@ -189,6 +190,7 @@ export default {
       search: "",
       dialog: false,
       modelcreate:false,
+      modeledit:false,
       confirmDeleteDlg:false,
       selectedDelete:"",
       stockArray: [],
@@ -261,6 +263,7 @@ export default {
       await api.addProduct(formData);
       window.location.reload();
     },
+    
   },
 };
 </script>
