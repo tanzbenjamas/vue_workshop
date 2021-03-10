@@ -38,7 +38,6 @@ export default {
     imageFile: null
   }),
   async mounted() {
-    
     let result = await api.getProductById(this.$route.params.id);    
     this.product = result.data;
   },

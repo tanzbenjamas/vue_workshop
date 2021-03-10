@@ -94,8 +94,8 @@
                 max-height="50"
               ></v-img>
             </td>
-            <td>{{ item.price  }}</td>
-            <td>{{ item.stock  }}</td>
+            <!-- <td>{{ item.price  }}</td>
+            <td>{{ item.stock  }}</td> -->
                   <td>
               <v-icon class="mr-2" @click="editItem(item)">
                 edit
@@ -144,9 +144,9 @@
           <v-form @submit.prevent="submit" ref="form">
             <v-text-field v-model="product.name" :counter="10" label="Name" required></v-text-field>
 
-            <v-text-field suffix="THB" type="number" v-model="product.price" label="Price" required></v-text-field>
+            <!-- <v-text-field suffix="THB" type="number" v-model="product.price" label="Price" required></v-text-field>
 
-            <v-text-field suffix="PCS" v-model="product.stock" label="Stock" required></v-text-field>
+            <v-text-field suffix="PCS" v-model="product.stock" label="Stock" required></v-text-field> -->
 
             <input type="file" @change="onFileSelected" />
             <br />
@@ -212,8 +212,8 @@ export default {
         { text: "Name", value: "name" },
         { text: "Image", value: "image" },
         { text: "Price", value: "price" },
-        { text: "Stock", value: "stock" },
-        { text: "Action", value: "action" },
+        // { text: "Stock", value: "stock" },
+        // { text: "Action", value: "action" },
       ],
     };
   },
