@@ -19,6 +19,11 @@ yarn build
 ```
 yarn lint
 ```
+### run backend_vue
+```
+cd backend_vue
+yarn nodemon
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
